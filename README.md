@@ -2,4 +2,4 @@
 
 Based on the Odin Project foundations course: https://www.theodinproject.com/lessons/foundations-calculator
 
-Live preview: 
+Live preview: https://victorbenedict.github.io/Project-Calculator/
