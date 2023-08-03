@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTP-8">
-	<link rel="stylesheet" href="styles.css">
-	<script src="script.js" defer></script>
-	<title>Project: Calculator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project: Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-<h1>Project: Calculator</h1>
-<hr>
-<div class="container">	
-	<!-- <input type="number" class="display"> -->
-	<div class="displayContainer">
-		<span id="display"></span>
-	</div>
-	<div></div>
-	<button class="btn_clear" id="clear">Clear</button>
-	<div></div>
-	<button class="btn_digit" id="7">7</button>
-	<button class="btn_digit" id="8">8</button>
-	<button class="btn_digit" id="9">9</button>
-	<button class="btn_operator" id="divide">÷</button>
-	<div></div>
-	<button class="btn_digit" id="4">4</button>
-	<button class="btn_digit" id="5">5</button>
-	<button class="btn_digit" id="6">6</button>
-	<button class="btn_operator" id="multiply">×</button>
-	<div></div>
-	<button class="btn_digit" id="1">1</button>
-	<button class="btn_digit" id="2">2</button>
-	<button class="btn_digit" id="3">3</button>
-	<button class="btn_operator" id="subtract">−</button>
-	<div></div>
-	<button class="btn_digit" id="0">0</button>
-	<button class="btn_decimal" id="decimal">.</button>
-	<button class="btn_equals" id="equals">=</button>
-	<button class="btn_operator" id="add">+</button>
-</div>
+  <main>
+   <div class="container">
+    <div class="item display"><span id="display"></span></div>
+    <div class="item button" id="backspace">⇦</div>
+    <div class="item button" id="memoryRecall">MRC</div>
+    <div class="item button" id="memorysubract">M-</div>
+    <div class="item button" id="memoryadd">M+</div>
+    <div class="item button" id="divide">÷</div>
+    <div class="item button" id="squareroot">√</div>
+    <div class="item button" id="num-7">7</div>
+    <div class="item button" id="num-8">8</div>
+    <div class="item button" id="num-9">9</div>
+    <div class="item button" id="multiply">x</div>
+    <div class="item button" id="signum">±</div>
+    <div class="item button" id="num-4">4</div>
+    <div class="item button" id="num-5">5</div>
+    <div class="item button" id="num-6">6</div>
+    <div class="item button" id="subtract">-</div>
+    <div class="item button" id="clear">C</div>
+    <div class="item button" id="num-1">1</div>
+    <div class="item button" id="num-2">2</div>
+    <div class="item button" id="num-3">3</div>
+    <div class="item plus button" id="add">+</div>
+    <div class="item button" id="allClear">AC</div>
+    <div class="item button" id="num-0">0</div>
+    <div class="item button" id="decimal">.</div>
+    <div class="item button" id="equals">=</div>
+   </div>
+  </main>
+  <footer>
+		<a href="https://www.theodinproject.com/lessons/foundations-calculator" target="_blank">The Odin Project</a>
+		<a href="https://github.com/victorbenedict/Project-Calculator">Source Code</a>
+	</footer>
 </body>
 </html>

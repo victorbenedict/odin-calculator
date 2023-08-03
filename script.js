@@ -1,170 +1,307 @@
-let operator = null;
-let value1 = null;
-let value2 = null;
-let displayReset = false;
-let calculationDone = false;
-let decimalStatus = false;
-document.getElementById('display').textContent = 0;
+const cl = console.log;
+const ct = console.table;
+const id = () =>  event.target.id
+cl('hello')
 
-//Event listener for the number buttons
-for (let i = 0; i <= 9; i++) {
-  document.getElementById(i).addEventListener("click", (e) => {
-    console.log(`*You pressed button ${i}`);
-		updateDisplay(i);
-  });
-}
-
-//Event listener for the operator buttons
-const btn_operator = document.querySelectorAll('.btn_operator');
-btn_operator.forEach(button => {
-  button.addEventListener('click', (e) => {
-		
-
-    console.log(`*You pressed button ${e.target.id}`);
-		displayReset = true;
-		decimalStatus = true;
-
-
-		//Set values
-
-		if(value1 == null && value2 == null ){
-			value1 = document.getElementById('display').textContent;
-			operator =  e.target.id;
-			console.log(`#1 Value1 = ${value1} \nValue2 = ${value2}`)
-
-		}
-		else if(value1 != null && value2 == null){
-			value2 = document.getElementById('display').textContent;
-			console.log(`#2 Value1 = ${value1} \nValue2 = ${value2}`)
-			calculate(value1,value2,operator);
-			operator =  e.target.id;
-
-		}
-		
-		else if(value1 != null && value2 != null){
-			value2 = document.getElementById('display').textContent;
-			console.log(`#3 Value1 = ${value1} \nValue2 = ${value2}`)
-			calculate(value1,value2,operator);
-			operator =  e.target.id;
-
-		}
-		
-
-  });
+document.getElementById('backspace').addEventListener('click', () => {
+  backspace();
 });
 
-//Event listener for equals button
-document.getElementById('equals').addEventListener("click", (e) => {
-	console.log(`*You pressed button ${e.target.id}`);
-	value2 = document.getElementById('display').textContent;
-	calculate(value1,value2,operator);
-	displayReset = true;
-	decimalStatus = true;
+const display = document.getElementById('display');
 
-
-})
-
-//General arithmetic operation function
-function calculate(a,b,op){
-	let result = 0;
-	a = parseFloat(a);
-	b = parseFloat(b);
-	console.log(`Calculate value: a = ${a} b = ${b} operator: ${op}`)
-	switch(op){
-		case 'add': 
-    result = a + b;
-    break;
-  case 'subtract': 
-    result = a - b;
-    break;
-  case 'multiply': 
-    result = a * b;
-    break;
-  case 'divide': 
-		switch(b){
-			case 0:
-				operator = null;
-				value1 = null;
-				value2 = null;
-				displayReset = true;
-				decimalStatus = false;
-				result = 'Error'
-
-			default:
-				result = a / b
-				break;	
-		}
-		
-	default: 
-		operator = null;
-		value1 = null;
-		value2 = null;
-		displayReset = true;
-		decimalStatus = false;
-    result = 'Error';
-	}
-	console.log(`Calculation activated and the result is ${result}.`);
-	value1 = result;
-	value2 = document.getElementById('display').textContent;
-	document.getElementById('display').textContent = result;
-	return result;
+function render(value){
+  display.textContent = value;
 }
 
-//Display behavior function 
-function updateDisplay(button){
-	let dsp = document.getElementById('display');
-	
-	if(button == 0 && dsp.textContent == 0 && displayReset == false){
-		dsp.textContent = 0; 
-		console.log('updateDisplay# 1');
-	}
-	else if(button < 0 || button <= 10 && dsp.textContent == 0 && displayReset == false){
-		dsp.textContent = '';
-		dsp.textContent += button;
-		console.log('updateDisplay# 2');
-	}
-	else if(button < 0 || button <= 10 && dsp.textContent != 0 && displayReset == false){
-		dsp.textContent += button;
-		console.log('updateDisplay# 4');
-	}
-	else if(button == 0 && dsp.textContent == 0 && displayReset == true){
-		dsp.textContent = 0; 
-		displayReset = false;
-		console.log('updateDisplay# 5');
-	}
-	else if(button == 0 && dsp.textContent == 0 && displayReset == true){
-		dsp.textContent = 0; 
-		displayReset = false;
-		console.log('updateDisplay# 6');
-
-	}
-	else if(button < 0 || button <= 10 && dsp.textContent != 0 && displayReset == true){
-		dsp.textContent = button;
-		displayReset = false;
-		console.log('updateDisplay# 7');
-	}
+function concatDigitToActiveValue(digit, activeVal = activeValue){
+  if(activeValue == null){
+    return '' + digit;
+  } else return '' + activeVal + digit;
 }
 
-//Event listener for clear button
-document.getElementById('clear').addEventListener("click", (e) => {
-	console.log(`*You pressed button ${e.target.id}`);
-	operator = null;
-	value1 = null;
-	value2 = null;
-	displayReset = false;
-	decimalStatus = false;
-	document.getElementById('display').textContent = 0; 
-})
+function backspace(){
+  if(activeValue == null){
+    clvalues(`event-backspace-doNothing`);
+  } else {
+    const arr = activeValue.split('');
+    arr.pop()
+    activeValue = arr.join('');
+    render(activeValue)
+    clvalues(`event-backspace`);
+  }
+}
 
-//Event listener for period button
-document.getElementById('decimal').addEventListener("click", (e) => {
-	console.log(`*You pressed button ${e.target.id}`);
-	const displayString = document.getElementById('display').textContent
-	if(decimalStatus == false){
-		document.getElementById('display').textContent += '.';
-		decimalStatus = true;
-	}
-		
-	
-})
+function allClear(){
+  baseValue = null;
+  activeValue = null;
+  operator = null;
+  result = null;
+  render('');
+  clvalues('event-allClear');
+}
 
+function clear(){
+  activeValue = null;
+  render('');
+  clvalues('clear');
+}
+
+function addDecimal(){
+  const regex = /(\.)/g;
+  if (regex.test(activeValue) || activeValue == null){
+    cl(regex.test(activeValue));
+    clvalues(`event-dec-doNothing`);
+  } else {
+    cl(regex.test(activeValue));
+    activeValue = concatDigitToActiveValue('.');
+    clvalues(`event-dec-added.`);
+    render(activeValue);
+  }
+}
+
+
+
+for (let index = 0; index <= 9; index++) {
+  document.getElementById(`num-${index}`).addEventListener('click', () => {
+  activeValue = concatDigitToActiveValue(index);
+  render(activeValue);
+  clvalues(`event-digit-${index}`);
+  });
+}
+
+document.getElementById('decimal').addEventListener('click', () => {
+  addDecimal();
+});
+
+document.getElementById('signum').addEventListener('click', () => {
+  if( activeValue == null) {
+    clvalues(`event-signum-doNothing.`);
+  } else{
+    activeValue *= -1;
+    clvalues(`event-signum.`)
+    render(activeValue);
+  }
+});
+
+document.getElementById('squareroot').addEventListener('click', () => {
+  if( activeValue == null) {
+    clvalues(`event-squareroot-doNothing.`);
+  } else{
+    activeValue = Math.sqrt(activeValue);
+    clvalues(`event-squareroot`);
+    render(activeValue);
+  }
+});
+
+document.getElementById('memoryadd').addEventListener('click', () => {
+  if (activeValue == null) {
+    clvalues(`event-memoryadd-doNothing.`);
+  } else {
+    memoryValue += +activeValue;
+    clvalues(`event-memoryadd.`);
+    
+  }
+  cl('memoryValue', memoryValue);
+});
+
+document.getElementById('memorysubract').addEventListener('click', () => {
+  if (activeValue == null) {
+    clvalues(`event-memorysubract-doNothing.`);
+  } else {
+    memoryValue -= +activeValue;
+    clvalues(`event-memorysubract.`);
+  }
+  cl('memoryValue', memoryValue);
+});
+
+document.getElementById('memoryRecall').addEventListener('dblclick', () => {
+  memoryValue = null;
+  activeValue = null;
+  render('');
+  clvalues(`event-memoryRecall-dblclick.`);
+  cl('memoryValue', memoryValue);
+});
+
+document.getElementById('memoryRecall').addEventListener('click', () => {
+  if (memoryValue == null) {
+    clvalues(`event-memoryRecall-click-doNothing.`);
+    cl('memoryValue', memoryValue);
+  } else {
+    render(memoryValue);
+    clvalues(`event-memoryRecall-click.`);
+    cl('memoryValue', memoryValue);
+  }
+});
+
+// ---------------operations here-----------
+
+let baseValue = null;
+let activeValue = null;
+let result = null;
+let operator = null;
+let memoryValue = null;
+let clvalues = (name) => {
+  cl(`${name} ( base: ${baseValue}, op: ${operator}, active: ${activeValue}, res: ${result} )`)
+};
+
+function calculate(value1, op, value2){
+  const a = parseFloat(value1);
+  const b = parseFloat(value2);
+  switch (op) {
+    case 'add': return a + b;
+    case 'subtract': return a - b;
+    case 'multiply': return a * b;
+    case 'divide': return a / b;
+  
+    default:
+      render('invalid operation')
+      baseValue = null;
+      activeValue = null;
+      operator = null;
+      result = null;
+      return 'invalid operation';
+  }
+}
+
+function operate(op){
+  if (baseValue == null && operator == null && activeValue != null && result == null) {
+    baseValue = activeValue;
+    activeValue = null;
+    operator = op;
+    clvalues(`fn-op-${op}-cnd-1`);
+    render(result);
+  } else if (baseValue != null && operator != null && activeValue != null && result == null) {
+    result = calculate(baseValue, operator, activeValue);
+    clvalues(`fn-op-${op}-cnd-2a`);
+    render(result);
+    baseValue = result;
+    activeValue = null;
+    operator = op;
+    clvalues(`fn-op-${op}-cnd-2b`)
+
+  } 
+  else if (baseValue != null && operator != null && activeValue != null && result != null) {
+    result = calculate(baseValue, operator, activeValue)
+    clvalues(`fn-op-${op}-cnd-3a`);
+    render(result);
+    baseValue = result;
+    activeValue = null;
+    operator = op;
+    clvalues(`fn-op-${op}-cnd-3b`);
+  } else {
+    clvalues(`fn-op-${op}-doNothing`);
+  }
+}
+
+function equals(op){
+  if (baseValue != null && operator != null && activeValue != null && result == null) {
+    result = calculate(baseValue, op, activeValue);
+    baseValue = result;
+    activeValue = null;
+    operator = null;
+    clvalues('event-equals-cnd-1')
+    render(result);
+    result = null;
+  } else if (baseValue != null && operator != null && activeValue != null && result != null) {
+    result = calculate(baseValue, op, activeValue)
+    baseValue = result;
+    activeValue = null;
+    operator = null;
+    clvalues('event-equals-cnd-2');
+    render(result);
+    result = null;
+  } else {
+    clvalues('event-equals-doNothing');
+  }
+}
+
+
+// -------event listeners here-----------
+document.getElementById('add').addEventListener('click', () => {
+  operate(id());
+  render('add')
+});
+
+document.getElementById('subtract').addEventListener('click', () => {
+  operate(id());
+  render('subtract')
+});
+
+document.getElementById('multiply').addEventListener('click', () => {
+  operate(id());
+  render('multiply by')
+});
+
+document.getElementById('divide').addEventListener('click', () => {
+  operate(id());
+  render('divided by')
+});
+
+document.getElementById('equals').addEventListener('click', () => {
+  equals(operator);
+});
+
+document.getElementById('allClear').addEventListener('click', () => {
+  allClear();
+});
+
+document.getElementById('clear').addEventListener('click', () => {
+  clear();
+});
+
+// document.addEventListener("keydown", function(event) {
+//   // Check if the pressed key is the backspace key (key code 8)
+//   if (event.keyCode === 8) {
+//     // Call the function or perform the action you want here
+//     // do something here
+//   }
+// });
+
+
+for ( let index = 0; index <= 9; index++) {
+  const key = 48 + index;
+  const keynumpad = 96 + index;
+  document.addEventListener("keydown", function(event) {
+    if (event.keyCode === key || event.keyCode === keynumpad) {
+      cl('keypressed', index)
+      activeValue = concatDigitToActiveValue(index);
+      render(activeValue);
+      clvalues(`event-digit-${index}`);
+    }
+  });
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.keyCode === 8) {
+    backspace();
+    cl('pressed backspace')
+  } if (event.keyCode === 27) {
+    allClear();
+    cl('pressed esc')
+  } if (event.keyCode === 46) {
+    clear();
+    cl('pressed delete')
+  } if (event.keyCode === 47 || event.keyCode === 111) {
+    operate('divide');
+    render('divided by');
+    cl('pressed divide')
+  } if (event.keyCode === 42 || event.keyCode === 106) {
+    operate('multiply');
+    render('multiply by');
+    cl('pressed multiply')
+  } if (event.keyCode === 45 || event.keyCode === 109) {
+    operate('subtract');
+    render('subtract by');
+    cl('pressed subtract')
+  } if (event.keyCode === 43 || event.keyCode === 107) {
+    operate('add');
+    render('add');
+    cl('pressed add')
+  } if (event.keyCode === 13 || event.keyCode === 108) {
+    equals(operator);
+    cl('pressed Enter')
+  } if (event.keyCode === 190 || event.keyCode === 110) {
+    addDecimal();
+    cl('pressed Decimal')
+  }
+});

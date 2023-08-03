@@ -1,5 +1,7 @@
 # Project-Calculator
 
-Based on the Odin Project foundations course: https://www.theodinproject.com/lessons/foundations-calculator
+A simple calculator based on the Odin Project: https://www.theodinproject.com/lessons/foundations-calculator
 
-Live preview: https://victorbenedict.github.io/Project-Calculator/
+This calculator featured with basic operations and key events for responsive design.
+
+Live preview: 
