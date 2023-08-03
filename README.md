@@ -4,4 +4,4 @@ A simple calculator based on the Odin Project: https://www.theodinproject.com/le
 
 This calculator featured with basic operations and key events for responsive design.
 
-Live preview: 
+Live preview: https://victorbenedict.github.io/Project-Calculator/
