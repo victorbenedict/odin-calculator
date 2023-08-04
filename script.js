@@ -295,19 +295,22 @@ document.addEventListener("keydown", function(event) {
     cl('pressed delete')
   } if (event.keyCode === 47 || event.keyCode === 111) {
     operate('divide');
-    render('divided by');
+    render(result);
     cl('pressed divide')
   } if (event.keyCode === 42 || event.keyCode === 106) {
     operate('multiply');
-    render('multiply by');
+    render(result);
+
     cl('pressed multiply')
   } if (event.keyCode === 45 || event.keyCode === 109) {
     operate('subtract');
-    render('subtract by');
+    render(result);
+
     cl('pressed subtract')
   } if (event.keyCode === 43 || event.keyCode === 107) {
     operate('add');
-    render('add');
+    render(result);
+
     cl('pressed add')
   } if (event.keyCode === 13 || event.keyCode === 108) {
     equals(operator);
