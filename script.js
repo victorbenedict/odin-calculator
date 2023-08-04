@@ -10,7 +10,11 @@ document.getElementById('backspace').addEventListener('click', () => {
 const display = document.getElementById('display');
 
 function render(value){
-  display.textContent = value;
+  if (value == null) {
+    display.textContent = baseValue;
+  } else {
+    display.textContent = value;
+  }
 }
 
 function concatDigitToActiveValue(digit, activeVal = activeValue){
