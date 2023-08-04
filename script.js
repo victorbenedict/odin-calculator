@@ -219,22 +219,25 @@ function equals(op){
 // -------event listeners here-----------
 document.getElementById('add').addEventListener('click', () => {
   operate(id());
-  render('add')
+  render(result)
 });
 
 document.getElementById('subtract').addEventListener('click', () => {
   operate(id());
-  render('subtract')
+  render(result)
+
 });
 
 document.getElementById('multiply').addEventListener('click', () => {
   operate(id());
-  render('multiply by')
+  render(result)
+
 });
 
 document.getElementById('divide').addEventListener('click', () => {
   operate(id());
-  render('divided by')
+  render(result)
+
 });
 
 document.getElementById('equals').addEventListener('click', () => {
