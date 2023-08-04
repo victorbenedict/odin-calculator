@@ -18,9 +18,14 @@ function render(value){
 }
 
 function concatDigitToActiveValue(digit, activeVal = activeValue){
+ 
   if(activeValue == null){
     return '' + digit;
-  } else return '' + activeVal + digit;
+  } else if (activeValue.length < 24) {
+    return '' + activeVal + digit;
+  } else {
+    return activeVal
+  }
 }
 
 function backspace(){
