@@ -1,82 +1,63 @@
 body {
-  font-family: Roboto, sans-serif;
-  min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  background-color: #222831;
-  color: #EEEEEE;
+  margin: 0;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: hsl(0, 0%, 95%);
 }
 
-main {
-  padding-top: 50px;
-  flex-grow: 1;
+#calculator {
+  font-family: Arial, sans-serif;
+  background-color: hsl(0, 0%, 15%);
+  border-radius: 15px;
+  max-width: 500px;
+  overflow: hidden;
 }
-.container {
-  display: grid;
-  grid-template-columns: 50px 50px 50px 50px 50px;
-  grid-template-rows: 50px 50px 50px 50px 50px 50px;
-  /* grid-row-gap: 20px; */
-  grid-gap:0.4rem;
-  justify-content: center; 
-}
-
-.item {
-  border: 1px whitesmoke solid;
-  /* border-radius: 8px; */
-  border-radius: 50%;
-  display: flex; /* Use flexbox to center text */
-  align-items: center; /* Center content vertically */
-  justify-content: center; /* Center content horizontally */
-  cursor: pointer;
-  transition: background-color 0.3s; 
-}
-
-.item:hover {
-  background-color: #424242; /* Slighstly lighter gray on hover */
-}
-
-.display {
-  grid-row: 1 / 2;
-  grid-column: 1 / 6;
-  cursor:default;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  background-color: #2e2e2e;
-  overflow:auto;
-}
-
-.display:hover {
-  background-color: #222831; 
-}
-
-.plus {
-  grid-row: 5 / 7;
-  grid-column: 5 / 6;
-  border-radius: 8px;
-}
-
-.display span {
+#display{
   width: 100%;
-  text-align: right;
-  padding-right: 0.4rem;
+  padding: 20px;
+  font-size: 5rem;
+  text-align: left;
+  border: none;
+  background-color: hsl(0, 0%, 20%);
+  color: white;
+}
+#keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 25px;
 }
 
-footer {
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.1);
+button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  border: none;
+  background-color: hsl(0, 0%, 30%);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-footer a{
-  display: block;
-  text-decoration: none;
-  text-align: center;
-  font-size: larger;
-  margin: auto;
-  color: whitesmoke;
+button:hover {
+  background-color: hsl(0, 0%, 40%);
 }
 
-footer a:hover {
-  text-decoration: underline; /* Add underline when the link is hovered */
+button:active {
+  background-color: hsl(0, 0%, 50%);
+}
+
+.operator-btn{
+  background-color: hsl(146, 80%, 17%);
+}
+
+.operator-btn:hover{
+  background-color: hsl(146, 80%, 20%);
+}
+
+.operator-btn:active{
+  background-color: hsl(146, 80%, 30%);
 }

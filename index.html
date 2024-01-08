@@ -3,43 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project: Calculator</title>
+  <title>Calculator</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <main>
-   <div class="container">
-    <div class="item display"><span id="display"></span></div>
-    <div class="item button" id="backspace">⇦</div>
-    <div class="item button" id="memoryRecall">MRC</div>
-    <div class="item button" id="memorysubract">M-</div>
-    <div class="item button" id="memoryadd">M+</div>
-    <div class="item button" id="divide">÷</div>
-    <div class="item button" id="squareroot">√</div>
-    <div class="item button" id="num-7">7</div>
-    <div class="item button" id="num-8">8</div>
-    <div class="item button" id="num-9">9</div>
-    <div class="item button" id="multiply">x</div>
-    <div class="item button" id="signum">±</div>
-    <div class="item button" id="num-4">4</div>
-    <div class="item button" id="num-5">5</div>
-    <div class="item button" id="num-6">6</div>
-    <div class="item button" id="subtract">-</div>
-    <div class="item button" id="clear">C</div>
-    <div class="item button" id="num-1">1</div>
-    <div class="item button" id="num-2">2</div>
-    <div class="item button" id="num-3">3</div>
-    <div class="item plus button" id="add">+</div>
-    <div class="item button" id="allClear">AC</div>
-    <div class="item button" id="num-0">0</div>
-    <div class="item button" id="decimal">.</div>
-    <div class="item button" id="equals">=</div>
-   </div>
-  </main>
-  <footer>
-		<a href="https://www.theodinproject.com/lessons/foundations-calculator" target="_blank">The Odin Project</a>
-		<a href="https://github.com/victorbenedict/Project-Calculator">Source Code</a>
-	</footer>
+  <div id="calculator">
+    <input id="display" readonly>
+    <div id="keys">
+      <button onclick="appendToDisplay('7')">7</button>
+      <button onclick="appendToDisplay('8')">8</button>
+      <button onclick="appendToDisplay('9')">9</button>
+      <button onclick="appendToDisplay('/')" class="operator-btn">/</button>
+      <button onclick="appendToDisplay('4')">4</button>
+      <button onclick="appendToDisplay('5')">5</button>
+      <button onclick="appendToDisplay('6')">6</button>
+      <button onclick="appendToDisplay('*')" class="operator-btn">*</button>
+      <button onclick="appendToDisplay('1')">1</button>
+      <button onclick="appendToDisplay('2')">2</button>
+      <button onclick="appendToDisplay('3')">3</button>
+      <button onclick="appendToDisplay('-')" class="operator-btn">-</button>
+      <button onclick="appendToDisplay('0')">0</button>
+      <button onclick="appendToDisplay('.')">.</button>
+      <button onclick="calculate()" class="operator-btn">=</button>
+      <button onclick="appendToDisplay('+')" class="operator-btn">+</button>
+      <button onclick="clearDisplay()" class="operator-btn">C</button>
+    </div>
+  </div>
+
 </body>
 </html>
